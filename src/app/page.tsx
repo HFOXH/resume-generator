@@ -117,6 +117,36 @@ export default function Home() {
         className="hidden"
       />
 
+      {/* Hero Section */}
+      <section className="bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 text-center">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">
+            {locale === "es"
+              ? "Crea tu CV Profesional en Minutos"
+              : "Create Your Professional CV in Minutes"}
+          </h1>
+          <p className="text-base sm:text-lg text-blue-100 max-w-2xl mx-auto leading-relaxed">
+            {locale === "es"
+              ? "Generador de Curriculum Vitae en formato Harvard. Gratuito, moderno, compatible con ATS y con descarga en PDF. Cambia entre español e inglés al instante."
+              : "Harvard format CV generator. Free, modern, ATS-friendly with PDF download. Switch between English and Spanish instantly."}
+          </p>
+          <div className="mt-6 flex items-center justify-center gap-4 text-sm text-blue-200">
+            <span className="flex items-center gap-1.5">
+              <span className="w-2 h-2 bg-emerald-400 rounded-full" />
+              {locale === "es" ? "100% Gratuito" : "100% Free"}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="w-2 h-2 bg-emerald-400 rounded-full" />
+              {locale === "es" ? "Compatible ATS" : "ATS Compatible"}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="w-2 h-2 bg-emerald-400 rounded-full" />
+              {locale === "es" ? "Descarga PDF" : "PDF Download"}
+            </span>
+          </div>
+        </div>
+      </section>
+
       {/* Mobile view toggle */}
       <div className="lg:hidden sticky top-16 z-40 bg-white border-b border-gray-200 px-4 py-2 flex gap-2">
         <button
