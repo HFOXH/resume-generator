@@ -270,7 +270,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="border-t border-gray-200 bg-white mt-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-sm text-gray-500">
-          &copy; 2026 Santiago Cárdenas. Made with Next.js, coffee ☕ &amp; Love ❤️.
+          &copy; 2026 <a className="text-blue-600 underline" href="https://santic.netlify.app/" target="_blank">Santiago Cárdenas</a>. Made with Next.js, coffee ☕ &amp; Love ❤️.
         </div>
       </footer>
 
