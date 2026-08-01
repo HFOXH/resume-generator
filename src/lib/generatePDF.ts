@@ -244,11 +244,18 @@ export function generatePDF(data: CVData, locale: Locale): void {
     for (const proj of data.projects) {
       addPageIfNeeded(10);
       setFont("bold", 11);
+      const projNameWidth = doc.getTextWidth(proj.name || "");
       text(proj.name || "", MARGIN_L, y);
       if (proj.url) {
         setFont("normal", 8);
         doc.setTextColor(0, 102, 204);
-        text(proj.url, MARGIN_L + doc.getTextWidth(proj.name || "") + 4, y);
+        const urlX = MARGIN_L + projNameWidth + 4;
+        const maxUrlX = LETTER_W - MARGIN_R;
+        if (urlX + doc.getTextWidth(proj.url) <= maxUrlX) {
+          text(proj.url, urlX, y);
+        } else {
+          text(proj.url, MARGIN_L, y + 4, { maxWidth: CONTENT_W });
+        }
         doc.setTextColor(0, 0, 0);
       }
       y += 5;
@@ -272,10 +279,22 @@ export function generatePDF(data: CVData, locale: Locale): void {
     for (const cert of data.certifications) {
       addPageIfNeeded(8);
       setFont("bold", 10);
+      const certNameWidth = doc.getTextWidth(cert.name || "");
+      const certDateWidth = cert.date ? doc.getTextWidth(formatDate(cert.date)) : 0;
       text(cert.name || "", MARGIN_L, y);
       if (cert.issuer) {
         setFont("normal", 10);
-        text(` — ${cert.issuer}`, MARGIN_L + doc.getTextWidth(cert.name || ""), y);
+        const issuerText = ` — ${cert.issuer}`;
+        const issuerWidth = doc.getTextWidth(issuerText);
+        const issuerX = MARGIN_L + certNameWidth;
+        const maxIssuerEndX = LETTER_W - MARGIN_R - certDateWidth - 2;
+        if (issuerX + issuerWidth <= maxIssuerEndX) {
+          text(issuerText, issuerX, y);
+        } else if (certNameWidth + doc.getTextWidth(cert.issuer) + 6 <= CONTENT_W) {
+          text(` — ${cert.issuer}`, MARGIN_L, y + 4, { maxWidth: CONTENT_W });
+        } else {
+          text(`— ${cert.issuer}`, MARGIN_L, y + 4, { maxWidth: CONTENT_W });
+        }
       }
       if (cert.date) {
         setFont("italic", 9);
