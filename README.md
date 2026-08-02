@@ -1,101 +1,100 @@
-# CV Generator - Harvard Format
+# Resume Generator
 
-Free, modern and ATS-compatible Curriculum Vitae generator. Harvard format, PDF download and bilingual support (EN/ES).
+<p align="center">
+  <img src="https://santic.netlify.app/_next/image?url=https%3A%2F%2Fsantic.netlify.app%2Fassets%2Fimg%2Fcv_generator.png&w=1080&q=75" alt="Resume Generator Preview" width="800"/>
+</p>
+
+<p align="center">
+  A free, modern and ATS-compatible CV generator built with Next.js.
+  Create professional resumes using the Harvard format, export them as PDF,
+  and manage your CV in English or Spanish.
+</p>
+
+<p align="center">
+  <a href="https://resume-generator-sc.vercel.app/">Live Demo</a>
+</p>
+
+---
+
+## About the Project
+
+Creating a professional resume that looks good and works well with Applicant Tracking Systems (ATS) can be challenging.
+
+Resume Generator provides a simple way to create structured, modern CVs following the Harvard format while keeping them readable by automated recruitment systems.
+
+The project is completely free and open source.
+
+---
 
 ## Features
 
-- **Harvard Format**: Professional CV with serif typography, clear sections and standard layout
-- **9 sections**: Personal info, summary, experience, education, skills, languages, projects, certifications and references
-- **ATS Compatible**: Built-in checker that analyzes your CV against Applicant Tracking System filters (Workday, Greenhouse, Jobscan)
-- **PDF Download**: Generates PDF with real selectable text (not image), Letter size (8.5 x 11 inches)
-- **Bilingual**: Instant switch between English and Spanish
-- **Profile photo**: Upload with circular preview
-- **Save/Load JSON**: Export and import your data as backup
-- **Responsive**: Side panel on desktop, form/preview toggle on mobile
-- **SEO optimized**: Metadata, OpenGraph, Twitter Card and keywords
+### Resume Builder
+
+- Harvard format professional layout
+- Clean serif typography and standard CV structure
+- 9 customizable sections:
+  - Personal information
+  - Professional summary
+  - Work experience
+  - Education
+  - Skills
+  - Languages
+  - Projects
+  - Certifications
+  - References
+
+### ATS Compatibility
+
+Built-in basic ATS checker that analyzes your CV based on common recruitment system requirements.
+
+### Export & Data Management
+
+- PDF generation with real selectable text
+- Letter size format (8.5 x 11 inches)
+- Export CV data as JSON
+- Import saved CV data
+- Profile photo support
+
+### Internationalization
+
+- English language support
+- Spanish language support
+- Instant language switching
+
+### Responsive Design
+
+- Desktop optimized interface
+- Mobile-friendly form and preview
+- Modern responsive layout
+
+---
 
 ## Technologies
 
-- [Next.js 16](https://nextjs.org/) - React framework
-- [React 19](https://react.dev/) - UI library
-- [TypeScript](https://www.typescriptlang.org/) - Static typing
-- [Tailwind CSS 4](https://tailwindcss.com/) - Styling
-- [jsPDF](https://parall.ax/products/jspdf) - Real text PDF generation
-- [Lucide React](https://lucide.dev/) - Icons
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- jsPDF
+- Lucide React
+
+---
 
 ## Installation
 
 ```bash
-# Clone the repository
-git clone https://github.com/your-username/cv.git
-
-# Enter the directory
-cd cv
-
-# Install dependencies
+git clone https://github.com/HFOXH/resume-generator.git
+cd resume-generator
 npm install
-
-# Run in development
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open:
 
-## Available Commands
+http://localhost:3000
 
-```bash
-npm run dev      # Development server
-npm run build    # Production build
-npm run start    # Start production server
-npm run lint     # Check code
-```
-
-## Project Structure
-
-```
-src/
-├── app/
-│   ├── globals.css        # Global styles + Tailwind
-│   ├── layout.tsx         # Root layout with SEO metadata
-│   └── page.tsx           # Main page
-├── components/
-│   ├── ATSChecker.tsx     # ATS checker modal
-│   ├── CVForm.tsx         # Form with 9 sections
-│   ├── CVPreview.tsx      # Harvard format preview
-│   └── Header.tsx         # Top bar with language toggle
-├── context/
-│   └── LanguageContext.tsx # Internationalization context
-└── lib/
-    ├── atsChecker.ts      # ATS analysis logic
-    ├── generatePDF.ts     # PDF generator with jsPDF
-    ├── translations.ts    # EN/ES translations
-    └── types.ts           # TypeScript types
-```
-
-## ATS Checker
-
-The ATS checker analyzes 12 criteria based on real systems:
-
-| Check | Category | Severity |
-|-------|----------|----------|
-| Full name | Contact | Critical |
-| Valid email | Contact | Critical |
-| Phone number | Contact | Critical |
-| Location | Contact | Warning |
-| Professional title | Content | Warning |
-| Summary (min. 50 chars) | Content | Warning |
-| At least 1 experience | Content | Critical |
-| Quantifiable achievements | Keywords | Info |
-| Education | Content | Critical |
-| Min. 3 skills | Keywords | Warning |
-| LinkedIn | Format | Info |
-| Consistent dates | Format | Warning |
-
-**Scoring:**
-- 80-100: Green - Your CV will pass ATS filters
-- 50-79: Yellow - Needs improvements
-- 0-49: Red - Requires significant changes
+---
 
 ## License
 
-MIT
+This project is licensed under the MIT License.
