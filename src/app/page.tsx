@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import Header from "@/components/Header";
 import CVForm from "@/components/CVForm";
 import CVPreview from "@/components/CVPreview";
+import JsonEditor from "@/components/JsonEditor";
 import ATSChecker from "@/components/ATSChecker";
 import { useLanguage } from "@/context/LanguageContext";
 import { type CVData, emptyCVData } from "@/lib/types";
@@ -17,14 +18,17 @@ import {
   Upload,
   Save,
   Shield,
+  Code,
 } from "lucide-react";
 
 type ViewMode = "form" | "preview";
+type EditorMode = "normal" | "json";
 
 export default function Home() {
   const { t, locale } = useLanguage();
   const [cvData, setCvData] = useState<CVData>(emptyCVData);
   const [viewMode, setViewMode] = useState<ViewMode>("form");
+  const [editorMode, setEditorMode] = useState<EditorMode>("normal");
   const [downloading, setDownloading] = useState(false);
   const [atsResult, setAtsResult] = useState<ATSResult | null>(null);
   const cvRef = useRef<HTMLDivElement>(null);
@@ -175,7 +179,34 @@ export default function Home() {
 
       {/* Action buttons */}
       <div className="sticky top-16 lg:top-16 z-30 bg-white/90 backdrop-blur-sm border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-end gap-2 flex-wrap">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-2 flex-wrap">
+          {/* Editor mode toggle */}
+          <div className="flex items-center bg-gray-100 rounded-xl p-1">
+            <button
+              onClick={() => setEditorMode("normal")}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                editorMode === "normal"
+                  ? "bg-white text-blue-600 shadow-sm"
+                  : "text-gray-500 hover:text-gray-700"
+              }`}
+            >
+              <PenLine className="w-4 h-4" />
+              {t("normalMode")}
+            </button>
+            <button
+              onClick={() => setEditorMode("json")}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                editorMode === "json"
+                  ? "bg-white text-blue-600 shadow-sm"
+                  : "text-gray-500 hover:text-gray-700"
+              }`}
+            >
+              <Code className="w-4 h-4" />
+              {t("jsonMode")}
+            </button>
+          </div>
+
+          <div className="flex items-center gap-2 flex-wrap">
           <button
             onClick={handleATSCheck}
             className="flex items-center gap-2 px-3 py-2.5 rounded-xl border border-gray-200 text-sm font-medium text-gray-600 hover:border-violet-300 hover:text-violet-600 hover:bg-violet-50 transition-all"
@@ -219,6 +250,7 @@ export default function Home() {
                 : "Generating..."
               : t("downloadPdf")}
           </button>
+          </div>
         </div>
       </div>
 
@@ -232,7 +264,11 @@ export default function Home() {
             }`}
           >
             <div className="sticky top-36 max-h-[calc(100vh-10rem)] overflow-y-auto pr-2 custom-scrollbar">
-              <CVForm data={cvData} onChange={setCvData} />
+              {editorMode === "normal" ? (
+                <CVForm data={cvData} onChange={setCvData} />
+              ) : (
+                <JsonEditor data={cvData} onChange={setCvData} />
+              )}
             </div>
           </div>
 
